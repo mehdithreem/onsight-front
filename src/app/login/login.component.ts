@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-		// this.
+		// this.authentication.logout();
 
 		this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 	}
@@ -36,7 +36,8 @@ export class LoginComponent implements OnInit {
 			.then(message => {
 				if(localStorage.getItem('activeUser'))
 					this.router.navigate([this.returnUrl]);
-
+				else
+					message
 			});
 	}
 }
