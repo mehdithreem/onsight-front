@@ -3,7 +3,7 @@
  */
 
 import {Injectable} from "@angular/core";
-import {Http, Response} from "@angular/http";
+import {Http, Response, URLSearchParams} from "@angular/http";
 
 import 'rxjs/add/operator/toPromise';
 
@@ -12,11 +12,17 @@ export class AuthenticationService {
 	constructor(private http: Http) {}
 
 	login(username: string, password: string) : Promise<string> {
-		return this.http.post('/login', JSON.stringify({username: username, password: password}))
+		localStorage.removeItem('activeUser');
+
+		let params = new URLSearchParams();
+		params.append('username', username);
+		params.append('password', password);
+
+		return this.http.post('http://localhost:8080/onsight/login', params)
 			.toPromise()
 			.then((response: Response) => {
 				let resp = response.json();
-				if (resp.result === 'false') {
+				if (!resp.result) {
 					return resp.message;
 				}
 				localStorage.setItem('activeUser', username);
@@ -25,5 +31,10 @@ export class AuthenticationService {
 				//TODO: do something for errors
 				return "An error occurred.";
 			});
+	}
+
+	logout() {
+		localStorage.removeItem('activeUser');
+		this.http.post('http://localhost:8080/onsight/logout', '');
 	}
 }

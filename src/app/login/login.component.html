@@ -1,0 +1,20 @@
+<form class="ui large form" (ngSubmit)="login()" #loginForm="ngForm">
+	<div class="ui stacked segment">
+		<div class="field">
+			<div class="ui right icon input">
+				<i class="user icon"></i>
+				<input type="text" [(ngModel)]="username" name="username" placeholder="نام کاربری" required>
+			</div>
+		</div>
+		<div class="field">
+			<div class="ui right icon input">
+				<i class="lock icon"></i>
+				<input type="password" [(ngModel)]="password" name="password" placeholder="کلمه عبور" required>
+			</div>
+		</div>
+		<button type="submit" class="ui fluid large teal submit button" [disabled]="!loginForm.form.valid">ورود</button>
+	</div>
+
+	<div class="ui error message">{{errorMessage}}</div>
+
+</form>

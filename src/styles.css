@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+
+@font-face {
+	font-family: Shabnam;
+	src: url('./assets/shabnam-font-v1.1.0/Shabnam.eot');
+	src: url('./assets/shabnam-font-v1.1.0/Shabnam.eot?#iefix') format('embedded-opentype'),
+	url('./assets/shabnam-font-v1.1.0/Shabnam.woff') format('woff'),
+	url('./assets/shabnam-font-v1.1.0/Shabnam.ttf') format('truetype');
+	font-weight: normal;
+}
+
+@font-face {
+	font-family: Shabnam;
+	src: url('./assets/shabnam-font-v1.1.0/Shabnam-Bold.eot');
+	src: url('./assets/shabnam-font-v1.1.0/Shabnam-Bold.eot?#iefix') format('embedded-opentype'),
+	url('./assets/shabnam-font-v1.1.0/Shabnam-Bold.woff') format('woff'),
+	url('./assets/shabnam-font-v1.1.0/Shabnam-Bold.ttf') format('truetype');
+	font-weight: bold;
+}
+
+@font-face {
+	font-family: Shabnam;
+	src: url('./assets/shabnam-font-v1.1.0/Shabnam-Light.eot');
+	src: url('./assets/shabnam-font-v1.1.0/Shabnam-Light.eot?#iefix') format('embedded-opentype'),
+	url('./assets/shabnam-font-v1.1.0/Shabnam-Light.woff') format('woff'),
+	url('./assets/shabnam-font-v1.1.0/Shabnam-Light.ttf') format('truetype');
+	font-weight: 300;
+}
