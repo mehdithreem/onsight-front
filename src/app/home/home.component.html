@@ -9,6 +9,9 @@
 				<i class="users icon"></i>
 			</a>
 			<div class="item">
+				{{currUser?.username}}
+			</div>
+			<div class="item">
 				<div class="ui button" (click)="logout()">خروج</div>
 			</div>
 		</div>
@@ -17,7 +20,7 @@
 
 <div class="ui container">
 	<div class="ui cards">
-		<div *ngFor="let user of unconfirmedUsers | async" class="card">
+		<div *ngFor="let user of unconfirmedUsers" class="card">
 			<div class="content">
 				<div class="header">
 					{{user.name}} {{user.family}}
@@ -27,9 +30,10 @@
 				</div>
 			</div>
 			<div class="extra content">
-				<div class="ui two buttons">
-					<div class="ui button" (click)="rejectUser(user)">رد</div>
-					<div class="ui positive button">قبول</div>
+				<div class="ui three buttons">
+					<div class="ui button" (click)="rejectUser(user.username)">رد</div>
+					<div class="ui positive button" (click)="acceptUser(user.username,false)">قبول</div>
+					<div class="ui primary button" (click)="acceptUser(user.username,true)">ادمین</div>
 				</div>
 			</div>
 		</div>

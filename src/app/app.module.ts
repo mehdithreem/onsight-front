@@ -9,11 +9,13 @@ import {AuthenticationService} from "./_services/authentication.service";
 import {AppRoutingModule} from "./app-routing.module";
 // import {NgSemanticModule} from "ng-semantic";
 import {HomeComponent} from "./home/home.component";
+import {SignupComponent} from "./signup/signup.component";
 
 @NgModule({
   declarations: [
 	  AppComponent,
 	  LoginComponent,
+	  SignupComponent,
 	  HomeComponent
   ],
   imports: [

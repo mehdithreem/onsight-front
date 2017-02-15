@@ -2,8 +2,6 @@
  * Created by mehdithreem on 2/8/17.
  */
 
-import { UserRole } from './UserRole';
-
 export class User {
 	constructor(username: string, name: string, family: string) {
 		this.username = username;
@@ -13,5 +11,5 @@ export class User {
 	username: string;
 	name: string;
 	family: string;
-	roles: UserRole;
+	roles: Array<string>;
 }

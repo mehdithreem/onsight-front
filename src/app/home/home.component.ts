@@ -17,8 +17,7 @@ declare let jQuery: any;
 })
 
 export class HomeComponent implements OnInit {
-	list: number[] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
-	unconfirmedUsers: Observable<User[]>;
+	unconfirmedUsers: User[];
 	currUser: User;
 
 	constructor(
@@ -27,11 +26,35 @@ export class HomeComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		this.unconfirmedUsers = this.userService.getUnconfirmedUsers();
-		this.userService.getUserDetail(localStorage.getItem('activeUser')).then(user => {this.currUser = user;});
+		this.userService.getUserDetail()
+			.then(user => {
+				this.currUser = user;
+				console.log(this.currUser);});
+		this.userService.getUnconfirmedUsers()
+			.then(users => {
+				this.unconfirmedUsers = users;
+			});
 	}
 
 	logout() {
 		this.router.navigate(['/login']);
+	}
+
+	rejectUser(username: string) {
+		this.userService.rejectUser(username)
+			.then(result => {
+				if (result) {
+					this.unconfirmedUsers = this.unconfirmedUsers.filter(u => u.username != username);
+				}
+			});
+	}
+
+	acceptUser(username: string, isAdmin: boolean) {
+		this.userService.acceptUser(username, isAdmin)
+			.then(result => {
+				if (result) {
+					this.unconfirmedUsers = this.unconfirmedUsers.filter(u => u.username != username);
+				}
+			});
 	}
 }

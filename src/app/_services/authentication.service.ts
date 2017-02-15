@@ -6,6 +6,7 @@ import {Injectable} from "@angular/core";
 import {Http, Response, URLSearchParams} from "@angular/http";
 
 import 'rxjs/add/operator/toPromise';
+import {User} from "../_modules/user";
 
 @Injectable()
 export class AuthenticationService {
@@ -19,7 +20,7 @@ export class AuthenticationService {
 		params.append('password', password);
 
 		return this.http
-			.post(`/onsight/login?${params.toString()}`, '') // TODO: fix this somehow
+			.post('/onsight/login', '',{ search: params} )
 			.toPromise()
 			.then((response: Response) => {
 				let resp = response.json();
@@ -37,5 +38,24 @@ export class AuthenticationService {
 	logout() {
 		localStorage.removeItem('activeUser');
 		this.http.post('/onsight/logout', '');
+	}
+
+	signup(user: User, password: string): Promise<string|boolean> {
+		let params = new URLSearchParams();
+
+		params.append('username', user.username);
+		params.append('password', password);
+		params.append('name', user.name);
+		params.append('family', user.family);
+
+		return this.http
+			.post('/onsight/signup', '', { search: params})
+			.toPromise()
+			.then(response => {
+				if (response.json().result)
+					return true;
+				else
+					return response.json().message;
+			});
 	}
 }

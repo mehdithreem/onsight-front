@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Http} from "@angular/http";
+import {Http, URLSearchParams} from "@angular/http";
 import {Observable} from "rxjs";
 import {User} from "../_modules/user";
 import 'rxjs/add/operator/map';
@@ -17,7 +17,7 @@ export class UserService {
 			.toPromise()
 			.then(response => {
 				console.log("user info");
-				console.log(response);
+				console.log(response.json().userInfo as User);
 				return response.json().userInfo as User;
 			})
 			.catch(err => {
@@ -26,12 +26,42 @@ export class UserService {
 			});
 	}
 
-	getUnconfirmedUsers(): Observable<User[]> {
+	getUnconfirmedUsers(): Promise<User[]> {
 		return this.http
 			.get('/onsight/unconfirmed_users', { withCredentials: true })
-			.map(response => {
-				console.log(response);
+			.toPromise()
+			.then(response => {
 				return response.json().unconfirmedUsers as User[];
 			});
+	}
+
+	rejectUser(username: string): Promise<boolean> {
+		let params = new URLSearchParams();
+		params.append('username', username);
+		params.append('status', 'reject');
+		params.append('roles', 'user');
+
+		return this.http
+			.post('/onsight/specify_user_status','', {search: params})
+			.toPromise()
+			.then(response => {
+				return response.json().result;
+			})
+			.catch(err => false);
+	}
+
+	acceptUser(username: string, isAdmin: boolean): Promise<boolean> {
+		let params = new URLSearchParams();
+		params.append('username', username);
+		params.append('status', 'confirm');
+		params.append('roles', isAdmin ? 'admin' : 'user');
+
+		return this.http
+			.post('/onsight/specify_user_status', '', { search: params })
+			.toPromise()
+			.then(response => {
+				return response.json().result;
+			})
+			.catch(err => false);
 	}
 }
