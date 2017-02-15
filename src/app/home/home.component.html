@@ -12,7 +12,7 @@
 				{{currUser?.username}}
 			</div>
 			<div class="item">
-				<div class="ui button" (click)="logout()">خروج</div>
+				<a class="ui button" routerLink="/logout">خروج</a>
 			</div>
 		</div>
 	</div>
@@ -39,9 +39,3 @@
 		</div>
 	</div>
 </div>
-
-<script>
-	$('.ui.accordion')
-		.accordion()
-	;
-</script>

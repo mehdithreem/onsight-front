@@ -36,10 +36,6 @@ export class HomeComponent implements OnInit {
 			});
 	}
 
-	logout() {
-		this.router.navigate(['/login']);
-	}
-
 	rejectUser(username: string) {
 		this.userService.rejectUser(username)
 			.then(result => {

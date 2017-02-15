@@ -1,0 +1,12 @@
+  <nav>
+    <a routerLink="/crisis-center" routerLinkActive="active">Crisis Center</a>
+    <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
+  </nav>
+
+[Crisis Center] [Heroes] <---- NavBar
+  CRISIS CENTER          <---- Router Outlet
+    Get Your Crisis
+
+TODO: test in to in router outlets :D
+
+Up to: Wildcard Route
