@@ -8,7 +8,8 @@ import {Router, ActivatedRoute} from "@angular/router";
 @Component({
 	moduleId: module.id,
 	selector: "ons-login",
-	templateUrl: "./login.component.html"
+	templateUrl: "./login.component.html",
+	styleUrls: ["./login.component.css"]
 
 })
 
@@ -34,13 +35,10 @@ export class LoginComponent implements OnInit {
 	login() {
 		this.loading = true;
 
-		console.log("clicked");
-
 		this.authentication.login(this.username, this.password)
 			.then(message => {
 				if(localStorage.getItem('activeUser')) {
 					this.router.navigate([this.returnUrl]);
-					console.log("success");
 				} else {
 					// TODO: Remove this
 					console.log(message);

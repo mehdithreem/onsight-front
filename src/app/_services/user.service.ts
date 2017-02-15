@@ -11,9 +11,9 @@ import 'rxjs/add/operator/map';
 export class UserService {
 	constructor(private http : Http) { }
 
-	getUserDetail(username: string): Promise<User> {
+	getUserDetail(): Promise<User> {
 		return this.http
-			.get('http://localhost:8080/onsight/user_info', { withCredentials: true })
+			.get('/onsight/user_info', { withCredentials: true })
 			.toPromise()
 			.then(response => {
 				console.log("user info");
@@ -28,7 +28,7 @@ export class UserService {
 
 	getUnconfirmedUsers(): Observable<User[]> {
 		return this.http
-			.get('http://localhost:8080/onsight/unconfirmed_users', { withCredentials: true })
+			.get('/onsight/unconfirmed_users', { withCredentials: true })
 			.map(response => {
 				console.log(response);
 				return response.json().unconfirmedUsers as User[];

@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import {LoginComponent} from "./login/login.component";
 import {AuthenticationService} from "./_services/authentication.service";
 import {AppRoutingModule} from "./app-routing.module";
-import {NgSemanticModule} from "ng-semantic";
+// import {NgSemanticModule} from "ng-semantic";
 import {HomeComponent} from "./home/home.component";
 
 @NgModule({
@@ -20,7 +20,7 @@ import {HomeComponent} from "./home/home.component";
 	  BrowserModule,
 	  FormsModule,
 	  HttpModule,
-	  NgSemanticModule,
+	  // NgSemanticModule,
 	  AppRoutingModule
   ],
   providers: [

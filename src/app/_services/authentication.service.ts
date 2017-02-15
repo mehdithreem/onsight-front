@@ -18,7 +18,8 @@ export class AuthenticationService {
 		params.append('username', username);
 		params.append('password', password);
 
-		return this.http.post('http://localhost:8080/onsight/login', params)
+		return this.http
+			.post(`/onsight/login?${params.toString()}`, '') // TODO: fix this somehow
 			.toPromise()
 			.then((response: Response) => {
 				let resp = response.json();
@@ -35,6 +36,6 @@ export class AuthenticationService {
 
 	logout() {
 		localStorage.removeItem('activeUser');
-		this.http.post('http://localhost:8080/onsight/logout', '');
+		this.http.post('/onsight/logout', '');
 	}
 }
