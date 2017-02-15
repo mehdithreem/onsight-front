@@ -5,8 +5,13 @@
 import { UserRole } from './UserRole';
 
 export class User {
+	constructor(username: string, name: string, family: string) {
+		this.username = username;
+		this.name = name;
+		this.family = family;
+	}
 	username: string;
-	firstname: string;
-	lastname: string;
-	role: UserRole;
+	name: string;
+	family: string;
+	roles: UserRole;
 }

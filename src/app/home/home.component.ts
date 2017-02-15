@@ -2,31 +2,33 @@
  * Created by mehdithreem on 2/11/17.
  */
 
-import {Component, OnInit, AfterViewInit, ViewChild, ElementRef, ViewChildren, QueryList} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
-import {forEach} from "@angular/router/src/utils/collection";
+import {Observable} from "rxjs";
+import {User} from "../_modules/user";
+import {UserService} from "../_services/user.service";
 
 declare let jQuery: any;
 
 @Component({
 	moduleId: module.id,
-	templateUrl: './home.component.html'
+	templateUrl: './home.component.html',
+	providers: [UserService],
 })
 
-export class HomeComponent implements OnInit, AfterViewInit {
-	constructor(private router: Router) {}
-	@ViewChild("accordion") accordion: ElementRef;
-	@ViewChildren("accordion") accordions: QueryList<ElementRef>;
+export class HomeComponent implements OnInit {
+	list: number[] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+	unconfirmedUsers: Observable<User[]>;
+	currUser: User;
+
+	constructor(
+		private userService: UserService,
+		private router: Router
+	) {}
 
 	ngOnInit() {
-
-	}
-
-	ngAfterViewInit() {
-		// jQuery(this.accordion.nativeElement).accordion();
-		// this.accordions.changes.subscribe(child => {
-		// 	jQuery(child.nativeElement).accordion();
-		// });
+		this.unconfirmedUsers = this.userService.getUnconfirmedUsers();
+		this.userService.getUserDetail(localStorage.getItem('activeUser')).then(user => {this.currUser = user;});
 	}
 
 	logout() {
